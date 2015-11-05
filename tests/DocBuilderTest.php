@@ -1,6 +1,5 @@
 <?php
 
-//TODO: @ignore
 use DocBuilder\DocBuilder;
 
 class DocBuilderTest extends PHPUnit_Framework_TestCase
@@ -51,17 +50,24 @@ class DocBuilderTest extends PHPUnit_Framework_TestCase
         $method->invoke($this->inst, 0);
     }
 
-
     /**
      * @expectedException \LogicException
      */
     public function testExampleLogicException()
     {
-        $method = $this->reflectionClass->getMethod('getLineBreakSequence');
-        $method->setAccessible(true);
+        $method = $this->reflectionClass->getMethod('example');
         $method->invoke($this->inst, 'some_location', 'some description', null, 30);
     }
 
+    /**
+     * @expectedException \LogicException
+     */
+    public function testSourceLogicException()
+    {
+        $method = $this->reflectionClass->getMethod('source');
+        $method->setAccessible(true);
+        $method->invoke($this->inst, 'some description', null, 30);
+    }
 
     public function testConvertToDocLine()
     {
@@ -69,7 +75,7 @@ class DocBuilderTest extends PHPUnit_Framework_TestCase
         $method->setAccessible(true);
         $input = 'This true doc line';
         $actual = $method->invoke($this->inst, $input);
-        $this->assertEquals('* ' . $input, $actual);
+        $this->assertEquals(' ' . DocBuilder::MARK_LINE . ' ' . $input, $actual);
     }
 
     public function getLineBreakSequenceProvider()
