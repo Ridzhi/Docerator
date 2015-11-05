@@ -16,10 +16,9 @@ class MethodTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->inst = new Method('test', 'Description test method');
+        $this->inst = new Method('test');
         $this->reflectionClass = new ReflectionClass($this->inst);
     }
-
 
     /**
      * @dataProvider setArgumentProvider
@@ -33,12 +32,12 @@ class MethodTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-
     public function testGetOutput()
     {
         $this->inst->setReturn('string');
         $this->inst->setArgument('name', 'string');
         $this->inst->setArgument('age', 'int');
+        $this->inst->setDescription('Description test method');
         $output = $this->inst->getOutput();
         $this->assertEquals('string test(string $name, int $age) Description test method', $output);
     }

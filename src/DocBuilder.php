@@ -109,10 +109,20 @@ class DocBuilder
         return $this->make('link', func_get_args());
     }
 
-
-    public function method(Method $method)
+    /**
+     * @param string $name
+     * @param callable $callback
+     * @return $this
+     */
+    public function method($name, $callback = null)
     {
-       return $this->make('method', [$method->getOutput()]);
+        $method = new Method($name);
+
+        if ($callback !== null) {
+            call_user_func($callback, $method);
+        }
+
+        return $this->make('method', [$method->getOutput()]);
     }
 
     public function param($name, $type = null, $description = null)

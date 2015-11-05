@@ -13,27 +13,39 @@ class Method
 
     /**
      * @param string $name
-     * @param string $description
-     * @param array|string $return
-     * @throws \InvalidArgumentException
      */
-    function __construct($name, $description = null, $return = null)
+    function __construct($name)
     {
         $this->name = $name;
-        $this->description = $description;
-        $this->return = $this->parseReturn($return);
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription($description)
     {
         $this->description = $description;
+
+        return $this;
     }
 
+    /**
+     * @param string|array $return
+     * @return $this
+     */
     public function setReturn($return)
     {
         $this->return = $this->parseReturn($return);
+
+        return $this;
     }
 
+    /**
+     * @param string $name
+     * @param string|null $type
+     * @return $this
+     */
     public function setArgument($name, $type = null)
     {
         $argument = '$' . $name;
@@ -43,13 +55,15 @@ class Method
         }
 
         $this->args[] = $argument;
-    }
 
+        return $this;
+    }
 
     public function getOutput()
     {
         $segments = [$this->return, $this->name . $this->getSignature(), $this->description];
-        return implode(' ', $segments);
+
+        return implode(' ', array_filter($segments));
     }
 
     protected function getSignature()
