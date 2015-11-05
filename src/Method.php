@@ -2,8 +2,7 @@
 
 namespace DocBuilder;
 
-
-class Method
+class Method implements MethodInterface
 {
 
     protected $name;
