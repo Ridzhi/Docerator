@@ -1,5 +1,5 @@
 {
-    "name": "ridzhi/pdg",
+    "name": "ridzhi/docbuilder",
     "description": "PhpDoc generator",
     "type": "library",
     "license": "MIT",
