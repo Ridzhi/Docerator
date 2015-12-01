@@ -78,12 +78,32 @@ class DocBuilderTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(' ' . DocBuilder::MARK_LINE . ' ' . $input, $actual);
     }
 
+    /**
+     * @dataProvider getSmartMethodArgs
+     */
+    public function testParseMethodArgument($input, $expected)
+    {
+        $method = $this->reflectionClass->getMethod('parseMethodArgument');
+        $method->setAccessible(true);
+        $actual = $method->invoke($this->inst, $input);
+        $this->assertEquals($expected, $actual);
+    }
+
     public function getLineBreakSequenceProvider()
     {
         return [
             [1, "\n"],
             [2, "\n\n"],
             [4, "\n\n\n\n"]
+        ];
+    }
+
+    public function getSmartMethodArgs()
+    {
+        return [
+            ['name', ['name', null]],
+            ['string name', ['name', 'string']],
+            ['string|array[]  name', ['name', 'string|array[]']]
         ];
     }
 
