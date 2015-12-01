@@ -159,6 +159,15 @@ class DocBuilder
     }
 
     /**
+     * @param MethodInterface $method
+     * @return $this
+     */
+    public function methodObj(MethodInterface $method)
+    {
+        return $this->make('method', [$method->getOutput()]);
+    }
+
+    /**
      * @param string $name
      * @return $this
      */

@@ -35,7 +35,7 @@ class Method implements MethodInterface
      */
     public function setReturn($return)
     {
-        $this->return = $this->parseReturn($return);
+        $this->return = self::parseReturn($return);
 
         return $this;
     }
@@ -76,7 +76,7 @@ class Method implements MethodInterface
         return '(' . $body . ')';
     }
 
-    protected function parseReturn($return)
+    protected static function parseReturn($return)
     {
         if ($return === null) {
             return 'void';
