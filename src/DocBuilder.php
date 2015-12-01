@@ -12,9 +12,18 @@ class DocBuilder
 
     protected $sections = [];
 
+
+    public function getOutput()
+    {
+        $this->prepareSections();
+        array_unshift($this->sections, self::MARK_BLOCK_BEGIN);
+        array_push($this->sections, ' ' . self::MARK_BLOCK_END);
+        return implode("\n", $this->sections);
+    }
+
     function __toString()
     {
-        return $this->build();
+        return $this->getOutput();
     }
 
     public function api()
@@ -411,14 +420,6 @@ class DocBuilder
         });
 
         return implode("\n", $lines);
-    }
-
-    protected function build()
-    {
-        $this->prepareSections();
-        array_unshift($this->sections, self::MARK_BLOCK_BEGIN);
-        array_push($this->sections, ' ' . self::MARK_BLOCK_END);
-        return implode("\n", $this->sections);
     }
 
     protected function getSignature($args)
