@@ -26,6 +26,9 @@ class DocBuilder
         return $this->getOutput();
     }
 
+    /**
+     * @return self
+     */
     public function api()
     {
         return $this->make('api');
@@ -121,6 +124,11 @@ class DocBuilder
         return $this->make('internal', [$description], $inline, '{%s }}');
     }
 
+    /**
+     * @param string $url
+     * @param string $name
+     * @return self
+     */
     public function license($url = null, $name = null)
     {
         return $this->make('license', func_get_args());
