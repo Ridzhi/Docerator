@@ -147,22 +147,14 @@ class DocBuilder
 
     /**
      * @param string $name
+     * @param array $args Each arg is string literal that looks like as 'argName' or 'argType argName'
      * @param string $return
      * @param string $description
-     * @param array $args Each arg is string literal that looks like as 'argName' or 'argType argName'
      * @return self
      */
-    public function method($name, $return = null, $description = null, array $args = null)
+    public function method($name,  array $args = null,  $return = null, $description = null)
     {
         $method = new Method($name);
-
-        if ($return !== null) {
-            $method->setReturn($return);
-        }
-
-        if ($description !== null) {
-            $method->setDescription($description);
-        }
 
         if ($args !== null) {
 
@@ -170,6 +162,14 @@ class DocBuilder
                 $method->setArgument(...self::parseMethodArgument($arg));
             }
 
+        }
+
+        if ($return !== null) {
+            $method->setReturn($return);
+        }
+
+        if ($description !== null) {
+            $method->setDescription($description);
         }
 
         return $this->make('method', [$method->getOutput()]);
