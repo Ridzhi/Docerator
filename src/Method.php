@@ -13,10 +13,21 @@ class Method implements MethodInterface
     /**
      * @param string $name
      */
-    function __construct($name)
+    function __construct($name = null)
+    {
+        if ($name !== null) {
+            $this->name = $name;
+        }
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
     {
         $this->name = $name;
     }
+
 
     /**
      * @param string $description
@@ -58,8 +69,16 @@ class Method implements MethodInterface
         return $this;
     }
 
+    /**
+     * @return string
+     * @throws \RuntimeException
+     */
     public function getOutput()
     {
+        if (!$this->name) {
+            throw new \RuntimeException('Method name is required');
+        }
+
         $segments = [$this->return, $this->name . $this->getSignature(), $this->description];
 
         return implode(' ', array_filter($segments));
