@@ -1,8 +1,9 @@
 <?php
 
-use DocBuilder\DocBuilder;
+namespace DocBuilder;
 
-class DocBuilderTest extends PHPUnit_Framework_TestCase
+
+class DocBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var DocBuilder
@@ -18,7 +19,7 @@ class DocBuilderTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->inst = new DocBuilder();
-        $this->reflectionClass = new ReflectionClass($this->inst);
+        $this->reflectionClass = new \ReflectionClass($this->inst);
     }
 
     public function testMake()

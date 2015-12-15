@@ -1,8 +1,9 @@
 <?php
 
-use DocBuilder\Method;
+namespace DocBuilder;
 
-class MethodTest extends PHPUnit_Framework_TestCase
+
+class MethodTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -17,7 +18,7 @@ class MethodTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->inst = new Method('test');
-        $this->reflectionClass = new ReflectionClass($this->inst);
+        $this->reflectionClass = new \ReflectionClass($this->inst);
     }
 
     /**
