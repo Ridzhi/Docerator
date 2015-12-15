@@ -51,20 +51,14 @@ class Method implements MethodInterface
         return $this;
     }
 
+
     /**
-     * @param string $name
-     * @param string $type
-     * @return self
+     * @param Argument $arg
+     * @return $this
      */
-    public function setArgument($name, $type = null)
+    public function setArgument(Argument $arg)
     {
-        $argument = '$' . $name;
-
-        if ($type !== null) {
-            $argument = $type . ' ' . $argument;
-        }
-
-        $this->args[] = $argument;
+        $this->args[] = $arg;
 
         return $this;
     }
@@ -89,7 +83,16 @@ class Method implements MethodInterface
         $body = '';
 
         if (!empty($this->args)) {
-            $body = implode(', ', $this->args);
+
+            $segments = [];
+            /**
+             * @var Argument $arg
+             */
+            foreach ($this->args as $arg) {
+                $segments[] = $arg->getOutput();
+            }
+
+            $body = implode(', ', $segments);
         }
 
         return '(' . $body . ')';
