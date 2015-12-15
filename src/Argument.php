@@ -72,7 +72,7 @@ class Argument
      */
     protected function parse($expression)
     {
-        preg_match('/(\w+(?=\:))?\:?([\w0-9_]+)\=?((?<=\=).*)?/', $expression, $matches);
+        preg_match('/([\w\|]+(?=\:))?\:?([\w0-9_]+)\=?((?<=\=).*)?/', $expression, $matches);
 
         $count = count($matches);
 
