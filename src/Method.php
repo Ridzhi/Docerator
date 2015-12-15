@@ -31,7 +31,7 @@ class Method implements MethodInterface
 
     /**
      * @param string $description
-     * @return $this
+     * @return self
      */
     public function setDescription($description)
     {
@@ -42,7 +42,7 @@ class Method implements MethodInterface
 
     /**
      * @param string|array $return
-     * @return $this
+     * @return self
      */
     public function setReturn($return)
     {
@@ -53,8 +53,8 @@ class Method implements MethodInterface
 
     /**
      * @param string $name
-     * @param string|null $type
-     * @return $this
+     * @param string $type
+     * @return self
      */
     public function setArgument($name, $type = null)
     {
