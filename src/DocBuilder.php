@@ -159,7 +159,7 @@ class DocBuilder
         if ($args !== null) {
 
             foreach ($args as $arg) {
-                $method->setArgument(...self::parseMethodArgument($arg));
+                $method->setArgument(new Argument($arg));
             }
 
         }
@@ -472,27 +472,6 @@ class DocBuilder
         }
 
         return $type;
-    }
-
-    protected static function parseMethodArgument($arg)
-    {
-        preg_match_all('/([\w0-9\[\]\|]+)/', $arg, $matches);
-        $segments = $matches[0];
-
-        $count = count($segments);
-
-        if ($count > 2 || $count === 0) {
-            throw new \InvalidArgumentException(sprintf('"%s" isn\'t correct arg. Look doc', $arg));
-        }
-
-        if ($count === 2) {
-            list($type, $name) = $segments;
-        } else {
-            $name = $segments[0];
-            $type = null;
-        }
-
-        return [$name, $type];
     }
 
 } 
