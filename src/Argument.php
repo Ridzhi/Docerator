@@ -25,6 +25,21 @@ class Argument
         }
     }
 
+    public function getOutput()
+    {
+        $output = '$' . $this->name;
+
+        if ($this->type) {
+            $output = $this->type . ' ' .  $output;
+        }
+
+        if ($this->default !== self::DEFAULT_NOT_ENABLED) {
+            $output .= ' = ' . $this->default;
+        }
+
+        return $output;
+    }
+
     /**
      * @param string $type
      */
