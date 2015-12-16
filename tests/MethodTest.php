@@ -21,23 +21,11 @@ class MethodTest extends \PHPUnit_Framework_TestCase
         $this->reflectionClass = new \ReflectionClass($this->inst);
     }
 
-    /**
-     * @dataProvider setArgumentProvider
-     */
-    public function testSetArgument($name, $type, $expected)
-    {
-        $this->inst->setArgument($name, $type);
-        $property = $this->reflectionClass->getProperty('args');
-        $property->setAccessible(true);
-        $actual = $property->getValue($this->inst);
-        $this->assertEquals($expected, $actual);
-    }
-
     public function testGetOutput()
     {
         $this->inst->setReturn('string');
-        $this->inst->setArgument('name', 'string');
-        $this->inst->setArgument('age', 'int');
+        $this->inst->setArgument(new Argument('string:name'));
+        $this->inst->setArgument(new Argument('int:age'));
         $this->inst->setDescription('Description test method');
         $output = $this->inst->getOutput();
         $this->assertEquals('string test(string $name, int $age) Description test method', $output);
@@ -88,21 +76,13 @@ class MethodTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    public function setArgumentProvider()
-    {
-        return [
-            ['name', null, ['$name']],
-            ['name', 'string', ['string $name']],
-        ];
-    }
-
     public function getSignatureProvider()
     {
         return [
             [[], '()'],
-            [['$name'], '($name)'],
-            [['string $name'], '(string $name)'],
-            [['string $name', 'int $age'], '(string $name, int $age)']
+            [[new Argument('name')], '($name)'],
+            [[new Argument('string:name')], '(string $name)'],
+            [[new Argument('string:name'), new Argument('int:age')], '(string $name, int $age)']
         ];
     }
 
