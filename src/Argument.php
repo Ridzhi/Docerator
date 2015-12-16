@@ -25,7 +25,6 @@ class Argument
         }
     }
 
-    //TODO: default value must differ string liter
     public function getOutput()
     {
         $output = '$' . $this->name;
