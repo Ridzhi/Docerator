@@ -18,10 +18,7 @@ class Argument
     public function __construct($expression = null)
     {
         if ($expression !== null) {
-            $info = $this->parse($expression);
-            $this->name = $info['name'];
-            $this->type = $info['type'];
-            $this->default = $info['default'];
+            list($this->type, $this->name, $this->default) = $this->parse($expression);
         }
     }
 
@@ -30,7 +27,7 @@ class Argument
         $output = '$' . $this->name;
 
         if ($this->type) {
-            $output = $this->type . ' ' .  $output;
+            $output = $this->type . ' ' . $output;
         }
 
         if ($this->default !== self::DEFAULT_NOT_ENABLED) {
@@ -38,6 +35,14 @@ class Argument
         }
 
         return $output;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -99,12 +104,7 @@ class Argument
             $matches[3] = Argument::DEFAULT_NOT_ENABLED;
         }
 
-        return [
-            'type' => $matches[1],
-            'name' => $matches[2],
-            'default' => $matches[3]
-        ];
-
+        return array_slice($matches, 1);
     }
 
 }

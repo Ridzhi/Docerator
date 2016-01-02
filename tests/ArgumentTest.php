@@ -16,11 +16,7 @@ class ArgumentTest extends \PHPUnit_Framework_TestCase
         $method = $ref->getMethod('parse');
         $method->setAccessible(true);
         $actual = $method->invoke($arg, $expression);
-        $expected = [
-            'type' => $type,
-            'name' => $name,
-            'default' => $default
-        ];
+        $expected = [$type, $name, $default];
         $this->assertEquals($expected, $actual);
     }
 

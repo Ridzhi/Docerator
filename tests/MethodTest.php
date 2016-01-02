@@ -11,7 +11,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
      */
     protected $inst;
     /**
-     * @var ReflectionClass $reflectionClass
+     * @var \ReflectionClass $reflectionClass
      */
     protected $reflectionClass;
 
