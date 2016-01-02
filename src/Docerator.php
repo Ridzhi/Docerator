@@ -147,10 +147,12 @@ class Docerator
 
     /**
      * @param string $name
-     * @param array $args Each arg is string literal that looks like as 'argName' or 'argType argName'
+     * @param array $args Each arg is Argument expression
      * @param string $return
      * @param string $description
      * @return Docerator
+     *
+     * @see Argument::__construct()
      */
     public function method($name,  array $args = null,  $return = null, $description = null)
     {
