@@ -13,7 +13,8 @@ class Argument
     protected $default;
 
     /**
-     * @param string $expression
+     * @param string $expression expression, looks like '[varType]:varName=[varDefault]',
+     * for example 'age', 'int:age', 'int:age=0'
      */
     public function __construct($expression = null)
     {
@@ -39,26 +40,32 @@ class Argument
 
     /**
      * @param string $name
+     * @return Argument
      */
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
      * @param string $type
+     * @return Argument
      */
     public function setType($type)
     {
         $this->type = $type;
+        return $this;
     }
 
     /**
      * @param string $default
+     * @return Argument
      */
     public function setDefault($default)
     {
         $this->default = $default;
+        return $this;
     }
 
     /**
