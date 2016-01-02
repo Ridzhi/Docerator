@@ -1,13 +1,12 @@
-#DocBuilder - create php doc block for generated programs.
 #Docerator - create php doc block for generated programs.
 
 ##Usage
 
-DocBuilder supports all tags from http://www.phpdoc.org.
+Docerator supports all tags from http://www.phpdoc.org.
 ####Example:
 ```
 <?php
-$doc = new DocBuilder();
+$doc = new Docerator();
 
 $doc
     ->license('MIT')
