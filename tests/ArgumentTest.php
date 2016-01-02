@@ -1,6 +1,6 @@
 <?php
 
-namespace DocBuilder;
+namespace Docerator;
 
 
 class ArgumentTest extends \PHPUnit_Framework_TestCase

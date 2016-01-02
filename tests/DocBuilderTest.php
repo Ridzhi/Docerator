@@ -1,12 +1,12 @@
 <?php
 
-namespace DocBuilder;
+namespace Docerator;
 
 
 class DocBuilderTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var DocBuilder
+     * @var Docerator
      */
     protected $inst;
     /**
@@ -18,7 +18,7 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->inst = new DocBuilder();
+        $this->inst = new Docerator();
         $this->reflectionClass = new \ReflectionClass($this->inst);
     }
 
@@ -76,7 +76,7 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
         $method->setAccessible(true);
         $input = 'This true doc line';
         $actual = $method->invoke($this->inst, $input);
-        $this->assertEquals(' ' . DocBuilder::MARK_LINE . ' ' . $input, $actual);
+        $this->assertEquals(' ' . Docerator::MARK_LINE . ' ' . $input, $actual);
     }
 
     public function getLineBreakSequenceProvider()

@@ -1,4 +1,5 @@
 #DocBuilder - create php doc block for generated programs.
+#Docerator - create php doc block for generated programs.
 
 ##Usage
 

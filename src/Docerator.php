@@ -1,8 +1,8 @@
 <?php
 
-namespace DocBuilder;
+namespace Docerator;
 
-class DocBuilder
+class Docerator
 {
 
     const MARK_TAG = '@';
@@ -27,7 +27,7 @@ class DocBuilder
     }
 
     /**
-     * @return self
+     * @return Docerator
      */
     public function api()
     {
@@ -37,7 +37,7 @@ class DocBuilder
     /**
      * @param string $name
      * @param string $email
-     * @return self
+     * @return Docerator
      */
     public function author($name = null, $email = null)
     {
@@ -52,7 +52,7 @@ class DocBuilder
 
     /**
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function category($description = null)
     {
@@ -61,7 +61,7 @@ class DocBuilder
 
     /**
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function copyright($description = null)
     {
@@ -71,7 +71,7 @@ class DocBuilder
     /**
      * @param string $version
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function deprecated($version = null, $description = null)
     {
@@ -84,7 +84,7 @@ class DocBuilder
      * @param int $startLine
      * @param int $numberOfLines
      * @param bool $inline
-     * @return self
+     * @return Docerator
      */
     public function example($location = null, $description = null, $startLine = null, $numberOfLines = null, $inline = false)
     {
@@ -98,7 +98,7 @@ class DocBuilder
     }
 
     /**
-     * @return self
+     * @return Docerator
      */
     public function filesource()
     {
@@ -107,7 +107,7 @@ class DocBuilder
 
     /**
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function ignore($description = null)
     {
@@ -117,7 +117,7 @@ class DocBuilder
     /**
      * @param string $description
      * @param bool $inline
-     * @return self
+     * @return Docerator
      */
     public function internal($description = null, $inline = false)
     {
@@ -127,7 +127,7 @@ class DocBuilder
     /**
      * @param string $url
      * @param string $name
-     * @return self
+     * @return Docerator
      */
     public function license($url = null, $name = null)
     {
@@ -138,7 +138,7 @@ class DocBuilder
      * @param string $url
      * @param string $description
      * @param bool $inline
-     * @return self
+     * @return Docerator
      */
     public function link($url = null, $description = null, $inline = false)
     {
@@ -150,7 +150,7 @@ class DocBuilder
      * @param array $args Each arg is string literal that looks like as 'argName' or 'argType argName'
      * @param string $return
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function method($name,  array $args = null,  $return = null, $description = null)
     {
@@ -177,7 +177,7 @@ class DocBuilder
 
     /**
      * @param MethodInterface $method
-     * @return self
+     * @return Docerator
      */
     public function methodObj(MethodInterface $method)
     {
@@ -186,7 +186,7 @@ class DocBuilder
 
     /**
      * @param string $name
-     * @return self
+     * @return Docerator
      */
     public function package($name = null)
     {
@@ -197,7 +197,7 @@ class DocBuilder
      * @param string $name
      * @param string|array $type
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function param($name, $type = null, $description = null)
     {
@@ -208,7 +208,7 @@ class DocBuilder
      * @param string $name
      * @param string|array $type
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function property($name, $type = null, $description = null)
     {
@@ -219,7 +219,7 @@ class DocBuilder
      * @param string $name
      * @param string|array $type
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function propertyRead($name, $type = null, $description = null)
     {
@@ -230,7 +230,7 @@ class DocBuilder
      * @param string $name
      * @param string|array $type
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function propertyWrite($name, $type = null, $description = null)
     {
@@ -240,7 +240,7 @@ class DocBuilder
     /**
      * @param string|array $type
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function returnTag($type = null, $description = null)
     {
@@ -252,7 +252,7 @@ class DocBuilder
     /**
      * @param string $target URI|FQSEN
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function see($target = null, $description = null)
     {
@@ -262,7 +262,7 @@ class DocBuilder
     /**
      * @param string $version
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function since($version = null, $description = null)
     {
@@ -274,7 +274,7 @@ class DocBuilder
      * @param int $startLine
      * @param int $numberOfLines
      * @param bool $inline
-     * @return self
+     * @return Docerator
      */
     public function source($description = null, $startLine = null, $numberOfLines = null, $inline = false)
     {
@@ -289,7 +289,7 @@ class DocBuilder
 
     /**
      * @param string $name
-     * @return self
+     * @return Docerator
      */
     public function subpackage($name = null)
     {
@@ -299,7 +299,7 @@ class DocBuilder
     /**
      * @param string|array $type
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function throwsTag($type = null, $description = null)
     {
@@ -310,7 +310,7 @@ class DocBuilder
 
     /**
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function todo($description = null)
     {
@@ -320,7 +320,7 @@ class DocBuilder
     /**
      * @param string $fqsen
      * @param String $description
-     * @return self
+     * @return Docerator
      */
     public function uses($fqsen = null, $description = null)
     {
@@ -331,7 +331,7 @@ class DocBuilder
      * @param string $name
      * @param string|array $type
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function varTag($name, $type = null, $description = null)
     {
@@ -341,7 +341,7 @@ class DocBuilder
     /**
      * @param string $version
      * @param string $description
-     * @return self
+     * @return Docerator
      */
     public function version($version = null, $description = null)
     {
@@ -350,7 +350,7 @@ class DocBuilder
 
     /**
      * @param string $value
-     * @return self
+     * @return Docerator
      */
     public function text($value)
     {
@@ -359,7 +359,7 @@ class DocBuilder
 
     /**
      * @param int $count
-     * @return self
+     * @return Docerator
      */
     public function emptyLine($count = 1)
     {
@@ -452,7 +452,7 @@ class DocBuilder
      * @param string $name
      * @param string|array $type
      * @param string $description
-     * @return DocBuilder
+     * @return Docerator
      */
     protected function variable($tag, $name, $type = null, $description = null)
     {

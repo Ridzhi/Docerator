@@ -1,8 +1,9 @@
 {
-    "name": "ridzhi/docbuilder",
-    "description": "PhpDoc generator",
+    "name": "ridzhi/docerator",
+    "description": "Doc generator",
     "type": "library",
     "license": "MIT",
+    "homepage": "http://github.com/Ridzhi/Docerator",
     "authors": [
         {
             "name": "Danila Ridzhi",
@@ -17,7 +18,7 @@
     },
     "autoload": {
       "psr-4": {
-          "DocBuilder\\": ["src/"]
+          "Docerator\\": ["src/"]
       }
     }
 }

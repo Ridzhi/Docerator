@@ -1,6 +1,6 @@
 <?php
 
-namespace DocBuilder;
+namespace Docerator;
 
 
 class MethodTest extends \PHPUnit_Framework_TestCase
@@ -24,11 +24,11 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     public function testGetOutput()
     {
         $this->inst->setReturn('string');
-        $this->inst->setArgument(new Argument('string:name'));
+        $this->inst->setArgument(new Argument('string:name=\'player\''));
         $this->inst->setArgument(new Argument('int:age'));
         $this->inst->setDescription('Description test method');
         $output = $this->inst->getOutput();
-        $this->assertEquals('string test(string $name, int $age) Description test method', $output);
+        $this->assertEquals('string test(string $name = \'player\', int $age) Description test method', $output);
     }
 
     /**
