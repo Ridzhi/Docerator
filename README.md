@@ -5,7 +5,6 @@
 Docerator supports all tags from http://www.phpdoc.org.
 
 ```php
-
 <?php
 
 $doc = new \Docerator\Docerator();
