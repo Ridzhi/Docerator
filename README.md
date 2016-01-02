@@ -55,7 +55,7 @@ echo $output;
 ```php
 <?php
 
-$doc = new Docerator();
+$doc = new \Docerator\Docerator();
 $doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ```
 
@@ -64,13 +64,13 @@ $doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ```php
 <?php
 
-$method = new Method('getAge');
+$method = new \Docerator\Method('getAge');
 $method
     ->setArgument(new \Docerator\Argument('string:name=\'username\''))
     ->setReturn('int')
     ->setDescription('Get user age');
 
-$doc = new Docerator();
+$doc = new \Docerator\Docerator();
 $doc->methodObj($method);
 
 ```
@@ -89,13 +89,13 @@ $arg
 ```
 
 ###Type definition
-$type argument supports string|array syntax
+$type argument also supports array syntax
 
 ####Example
 ```php
 <?php
 
-$doc = new Docerator();
+$doc = new \Docerator\Docerator();
 $doc
 	->param('name', ['string', 'array'], 'description')
 	->property('name', ['string', 'array'], 'description')
