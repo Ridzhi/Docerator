@@ -1,11 +1,13 @@
-#Docerator - create php doc block for generated programs.
+#Docerator - create php doc blocks for generated programs.
 
 ##Usage
 
 Docerator supports all tags from http://www.phpdoc.org.
 
-```
+```php
+
 <?php
+
 $doc = new \Docerator\Docerator();
 
 $doc
@@ -50,15 +52,16 @@ echo $output;
 ###Method tag
 
 #### Inline syntax
-```
+```php
 <?php
+
 $doc = new Docerator();
 $doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ```
 
 ####Object syntax (Method object helper)
 
-```
+```php
 <?php
 
 $method = new Method('getAge');
@@ -74,7 +77,7 @@ $doc->methodObj($method);
 ###Argument helper
 Argument object constructor can get special expression looks like varType:varName=varDefaultValue,
 where varType and varDefaultValue is not required. Also you can use classic oop approach.
-```
+```php
 // special expression
 $arg = new \Docerator\Argument('string:name=\'username\'');
 // classic
@@ -89,8 +92,9 @@ $arg
 $type argument supports string|array syntax
 
 ####Example
-```
+```php
 <?php
+
 $doc = new Docerator();
 $doc
 	->param('name', ['string', 'array'], 'description')
