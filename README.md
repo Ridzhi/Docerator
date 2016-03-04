@@ -1,13 +1,13 @@
-#Docerator - create php doc blocks for generated programs.
+#DocBuilder - build php doc for generated programs.
 
 ##Usage
 
-Docerator supports all tags from http://www.phpdoc.org.
+DocBuilder supports all tags from http://www.phpdoc.org.
 
 ```php
 <?php
 
-$doc = new \Docerator\Docerator();
+$doc = new \DocBuilder\DocBlock();
 
 $doc
     ->text('Some text')
@@ -23,19 +23,19 @@ $doc
     ->license('https://opensource.org/licenses/MIT', 'MIT')
     ->link('project.com', 'description')
     ->method('getName')
-    ->package('Docerator\\Docerator')
+    ->package('DocBlock')
     ->param('name', 'string|array', 'description')
     ->property('name', 'string|array', 'description')
     ->propertyRead('name', 'string|array', 'description')
     ->propertyWrite('name', 'string|array', 'description')
     ->returnTag('string|array', 'description')
-    ->see('Docerator::see()', 'description')
+    ->see('DocBlock', 'description')
     ->since('1.0', 'description')
     ->source('description', 1, 2)
-    ->subpackage('\Docerator\Method')
+    ->subpackage('\DocBuilder\Method')
     ->throwsTag('Exception', 'description')
     ->emptyLine(2)
-    ->uses('Docerator::uses()', 'description')
+    ->uses('DocBlock', 'description')
     ->varTag('name', 'string|array', 'description')
     ->version('1.0', 'description');
 
@@ -54,7 +54,7 @@ echo $output;
 ```php
 <?php
 
-$doc = new \Docerator\Docerator();
+$doc = new \DocBuilder\DocBlock();
 $doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ```
 
@@ -63,13 +63,13 @@ $doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ```php
 <?php
 
-$method = new \Docerator\Method('getAge');
+$method = new \DocBuilder\Method('getAge');
 $method
-    ->setArgument(new \Docerator\Argument('string:name=\'username\''))
+    ->setArgument(new \DocBuilder\Argument('string:name=\'username\''))
     ->setReturn('int')
     ->setDescription('Get user age');
 
-$doc = new \Docerator\Docerator();
+$doc = new \DocBuilder\DocBlock();
 $doc->methodObj($method);
 
 ```
@@ -77,10 +77,12 @@ $doc->methodObj($method);
 Argument object constructor can get special expression looks like varType:varName=varDefaultValue,
 where varType and varDefaultValue is not required. Also you can use classic oop approach.
 ```php
+<php
+
 // special expression
-$arg = new \Docerator\Argument('string:name=\'username\'');
+$arg = new \DocBuilder\Argument('string:name=\'username\'');
 // classic
-$arg = new \Docerator\Argument();
+$arg = new \DocBuilder\Argument();
 $arg
     ->setName('name')
     ->setType('string')
@@ -94,7 +96,7 @@ $type argument also supports array syntax
 ```php
 <?php
 
-$doc = new \Docerator\Docerator();
+$doc = new \DocBuilder\DocBlock();
 $doc
 	->param('name', ['string', 'array'], 'description')
 	->property('name', ['string', 'array'], 'description')
@@ -103,6 +105,6 @@ $doc
     ->returnTag(['string', 'array'], 'description')
     ->varTag('name', ['string', 'array'], 'description');
 
-$arg = new \Docerator\Argument();
+$arg = new \DocBuilder\Argument();
 $arg->setType(['string', 'array']);
 ``` 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Docerator;
+namespace DocBuilder;
 
 class Method implements MethodInterface
 {
