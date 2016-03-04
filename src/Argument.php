@@ -6,7 +6,7 @@ namespace DocBuilder;
 class Argument
 {
 
-    const DEFAULT_NOT_ENABLED = '___null___';
+    const DEFAULT_UNDEFINED = '___undefined___';
 
     protected $name;
     protected $type;
@@ -32,7 +32,7 @@ class Argument
             $output = $this->type . ' ' . $output;
         }
 
-        if ($this->default !== self::DEFAULT_NOT_ENABLED) {
+        if ($this->default !== self::DEFAULT_UNDEFINED) {
             $output .= ' = ' . $this->default;
         }
 
@@ -117,7 +117,7 @@ class Argument
         }
 
         if ($count === 3) {
-            $matches[3] = Argument::DEFAULT_NOT_ENABLED;
+            $matches[3] = Argument::DEFAULT_UNDEFINED;
         }
 
         return array_slice($matches, 1);

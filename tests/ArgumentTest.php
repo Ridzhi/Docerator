@@ -24,8 +24,8 @@ class ArgumentTest extends \PHPUnit_Framework_TestCase
     public function parseProvider()
     {
         return [
-            ['id', '', 'id', Argument::DEFAULT_NOT_ENABLED],
-            ['int:id', 'int', 'id', Argument::DEFAULT_NOT_ENABLED],
+            ['id', '', 'id', Argument::DEFAULT_UNDEFINED],
+            ['int:id', 'int', 'id', Argument::DEFAULT_UNDEFINED],
             ['int:id=404', 'int', 'id', 404]
         ];
     }
