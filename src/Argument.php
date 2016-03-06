@@ -11,7 +11,6 @@ class Argument
     protected $name;
     protected $type;
     protected $default;
-    protected $options;
 
     /**
      * @param string $expression expression, looks like '[varType]:varName=[varDefault]',
@@ -20,7 +19,7 @@ class Argument
     public function __construct($expression = null)
     {
         if ($expression !== null) {
-            list($this->type, $this->name, $this->default, $this->options) = $this->parse($expression);
+            list($this->type, $this->name, $this->default) = $this->parse($expression);
         }
     }
 
