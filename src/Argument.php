@@ -115,19 +115,30 @@ class Argument
      */
     protected function parse($expression)
     {
-        preg_match('/([\w\|]+(?=\:))?\:?([\w0-9_]+)\=?((?<=\=).*)?/', $expression, $matches);
+        // three capturing groups [type] name [default], [] - not required
+        $hasErrors = (false === preg_match('/(\w+(?=\:))?\:?([\w0-9_]+)\=?((?<=\=).*)?/', $expression, $matches));
 
-        $count = count($matches);
-
-        if ($count < 3) {
-            throw new \InvalidArgumentException('Not valid expression to parse');
+        if($hasErrors) {
+            throw new \InvalidArgumentException('preg_match error, may be invalid expression to parse');
         }
 
-        if ($count === 3) {
-            $matches[3] = Argument::DEFAULT_UNDEFINED;
+        $result = array_slice($matches, 1);
+
+        // because required(without ?) capturing group is a second
+        $minMatchesIfValid = 2;
+
+        if (count($result) < $minMatchesIfValid) {
+            throw new \InvalidArgumentException('Invalid expression to parse');
         }
 
-        return array_slice($matches, 1);
+        // default capturing group is a third and it not required
+        $isDefaultUndefined = !(isset($result[2]));
+
+        if ($isDefaultUndefined) {
+            $result[2] = Argument::DEFAULT_UNDEFINED;
+        }
+
+        return $result;
     }
 
     protected function defineDefault($default)
