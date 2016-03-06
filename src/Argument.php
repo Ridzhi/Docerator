@@ -19,7 +19,7 @@ class Argument
     public function __construct($expression = null)
     {
         if ($expression !== null) {
-            list($this->type, $this->name, $this->default) = $this->parse($expression);
+            list($this->type, $this->name, $this->default) = self::parse($expression);
         }
     }
 
@@ -108,12 +108,17 @@ class Argument
         return $this->default;
     }
 
+    protected function defineDefault($default)
+    {
+        $this->default = $default;
+    }
+
     /**
      * @param string $expression
      * @return array
      * @throws \InvalidArgumentException
      */
-    protected function parse($expression)
+    protected static function parse($expression)
     {
         // three capturing groups [type] name [default], [] - not required
         $hasErrors = (false === preg_match('/(\w+(?=\:))?\:?([\w0-9_]+)\=?((?<=\=).*)?/', $expression, $matches));
@@ -139,11 +144,6 @@ class Argument
         }
 
         return $result;
-    }
-
-    protected function defineDefault($default)
-    {
-        $this->default = $default;
     }
 
 }
