@@ -409,11 +409,6 @@ class DocBlock
         return ($count === 1) ? "\n" : implode(array_fill(0, $count, "\n"));
     }
 
-    protected function convertToDocLine($input)
-    {
-        return ' ' . self::MARK_LINE . ' ' . $input;
-    }
-
     protected function prepareSections()
     {
         array_walk($this->sections, function (& $section) {
@@ -426,7 +421,7 @@ class DocBlock
         $lines = explode("\n", $section);
 
         array_walk($lines, function (& $line) {
-            $line = $this->convertToDocLine(trim($line));
+            $line = self::formatToDocLine($line);
         });
 
         return implode("\n", $lines);
@@ -474,6 +469,11 @@ class DocBlock
         }
 
         return $type;
+    }
+
+    protected static function formatToDocLine($input)
+    {
+        return ' ' . self::MARK_LINE . ' ' . trim($input);
     }
 
 } 

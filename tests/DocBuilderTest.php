@@ -70,13 +70,13 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
         $method->invoke($this->inst, 'some description', null, 30);
     }
 
-    public function testConvertToDocLine()
+    public function testFormatToDocLine()
     {
-        $method = $this->reflectionClass->getMethod('convertToDocLine');
+        $method = $this->reflectionClass->getMethod('formatToDocLine');
         $method->setAccessible(true);
-        $input = 'This true doc line';
+        $input = 'Some text ';
         $actual = $method->invoke($this->inst, $input);
-        $this->assertEquals(' ' . DocBlock::MARK_LINE . ' ' . $input, $actual);
+        $this->assertEquals(' * Some text', $actual);
     }
 
     public function getLineBreakSequenceProvider()
