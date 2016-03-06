@@ -5,7 +5,6 @@
 DocBuilder supports all tags from http://www.phpdoc.org.
 
 ```php
-<?php
 
 $doc = new \DocBuilder\DocBlock();
 
@@ -52,7 +51,6 @@ echo $output;
 
 #### Inline syntax
 ```php
-<?php
 
 $doc = new \DocBuilder\DocBlock();
 $doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
@@ -61,7 +59,6 @@ $doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ####Object syntax (Method object helper)
 
 ```php
-<?php
 
 $method = new \DocBuilder\Method('getAge');
 $method
@@ -76,8 +73,8 @@ $doc->methodObj($method);
 ###Argument helper
 Argument object constructor can get special expression looks like varType:varName=varDefaultValue,
 where varType and varDefaultValue is not required. Also you can use classic oop approach.
+
 ```php
-<php
 
 // special expression
 $arg = new \DocBuilder\Argument('string:name=\'username\'');
@@ -86,15 +83,15 @@ $arg = new \DocBuilder\Argument();
 $arg
     ->setName('name')
     ->setType('string')
-    ->setDefault('\'username\'');
+    ->setDefault('\'username\'')
+    // or use string helper
+    ->setDefaultAsString('username');
 ```
 
 ###Type definition
 $type argument also supports array syntax
 
-####Example
 ```php
-<?php
 
 $doc = new \DocBuilder\DocBlock();
 $doc
