@@ -427,24 +427,6 @@ class DocBlock
         return implode("\n", $lines);
     }
 
-    protected function getSignature($args)
-    {
-        $body = '';
-
-        if ($args !== null) {
-
-            $vars = [];
-
-            foreach ($args as $definition) {
-                $vars[] = implode(' ', $definition);
-            }
-
-            $body = implode(', ', $vars);
-        }
-
-        return '(' . $body . ')';
-    }
-
     /**
      * @param string $name
      * @param string|array $type
