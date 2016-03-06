@@ -45,6 +45,7 @@ class Argument
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -55,6 +56,7 @@ class Argument
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -69,6 +71,12 @@ class Argument
         return $this;
     }
 
+    /**
+     * Set default with quotes
+     *
+     * @param string $default
+     * @return Argument
+     */
     public function setDefaultAsString($default)
     {
         $this->defineDefault('\'' . $default . '\'');
