@@ -246,7 +246,7 @@ class DocBlock
      */
     public function returnTag($type = null, $description = null)
     {
-        $type = $this->parseType($type);
+        $type = self::parseType($type);
 
         return $this->make('return', [$type, $description]);
     }
@@ -305,7 +305,7 @@ class DocBlock
      */
     public function throwsTag($type = null, $description = null)
     {
-        $type = $this->parseType($type);
+        $type = self::parseType($type);
 
         return $this->make('throws', [$type, $description]);
     }
@@ -453,7 +453,7 @@ class DocBlock
      */
     protected function variable($tag, $name, $type = null, $description = null)
     {
-        $type = $this->parseType($type);
+        $type = self::parseType($type);
 
         return $this->make($tag, [$type, '$' . $name, $description]);
     }
@@ -462,7 +462,7 @@ class DocBlock
      * @param string|array $type
      * @return string
      */
-    protected function parseType($type)
+    protected static function parseType($type)
     {
         if (is_array($type)) {
             $type = implode('|', $type);
