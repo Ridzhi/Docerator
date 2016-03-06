@@ -2,6 +2,7 @@
 
 namespace DocBuilder;
 
+
 class DocBlock
 {
 
@@ -11,7 +12,6 @@ class DocBlock
     const MARK_BLOCK_END = '*/';
 
     protected $sections = [];
-
 
     public function getOutput()
     {

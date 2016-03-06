@@ -2,6 +2,7 @@
 
 namespace DocBuilder;
 
+
 class Method implements MethodInterface
 {
 
@@ -28,7 +29,6 @@ class Method implements MethodInterface
         $this->name = $name;
     }
 
-
     /**
      * @param string $description
      * @return self
@@ -50,7 +50,6 @@ class Method implements MethodInterface
 
         return $this;
     }
-
 
     /**
      * @param Argument $arg
