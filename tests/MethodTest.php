@@ -46,33 +46,30 @@ class MethodTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    /**
-     * @dataProvider parseTypeProvider
-     */
-    public function testParseType($input, $expected)
+    public function testParseTypeString()
     {
         $method = $this->reflectionClass->getMethod('parseType');
         $method->setAccessible(true);
-        $actual = $method->invoke($this->inst, $input);
-        $this->assertEquals($expected, $actual);
+        $actual = $method->invoke($this->inst, 'SomeClass');
+        $this->assertEquals('SomeClass', $actual);
+    }
+
+    public function testParseTypeArray()
+    {
+        $method = $this->reflectionClass->getMethod('parseType');
+        $method->setAccessible(true);
+        $actual = $method->invoke($this->inst, ['array', 'string']);
+        $this->assertEquals('array|string', $actual);
     }
 
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testParseTypeException()
+    public function testParseTypeNotArrayOrString()
     {
         $method = $this->reflectionClass->getMethod('parseType');
         $method->setAccessible(true);
         $method->invoke($this->inst, 7);
-    }
-
-    public function parseTypeProvider()
-    {
-        return [
-            ['string', 'string'],
-            [['string', 'array', 'null'], 'string|array|null']
-        ];
     }
 
     public function getSignatureProvider()
