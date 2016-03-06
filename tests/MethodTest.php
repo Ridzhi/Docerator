@@ -47,11 +47,11 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider parseReturnProvider
+     * @dataProvider parseTypeProvider
      */
-    public function testParseReturn($input, $expected)
+    public function testParseType($input, $expected)
     {
-        $method = $this->reflectionClass->getMethod('parseReturn');
+        $method = $this->reflectionClass->getMethod('parseType');
         $method->setAccessible(true);
         $actual = $method->invoke($this->inst, $input);
         $this->assertEquals($expected, $actual);
@@ -60,17 +60,16 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testParseReturnException()
+    public function testParseTypeException()
     {
-        $method = $this->reflectionClass->getMethod('parseReturn');
+        $method = $this->reflectionClass->getMethod('parseType');
         $method->setAccessible(true);
         $method->invoke($this->inst, 7);
     }
 
-    public function parseReturnProvider()
+    public function parseTypeProvider()
     {
         return [
-            [null, 'void'],
             ['string', 'string'],
             [['string', 'array', 'null'], 'string|array|null']
         ];

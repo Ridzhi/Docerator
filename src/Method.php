@@ -46,7 +46,7 @@ class Method implements MethodInterface
      */
     public function setReturn($return)
     {
-        $this->return = self::parseReturn($return);
+        $this->return = self::parseType($return);
 
         return $this;
     }
@@ -97,21 +97,17 @@ class Method implements MethodInterface
         return '(' . $body . ')';
     }
 
-    protected static function parseReturn($return)
+    protected static function parseType($type)
     {
-        if ($return === null) {
-            return 'void';
+        if (is_string($type)) {
+            return $type;
         }
 
-        if (is_string($return)) {
-            return $return;
+        if (is_array($type)) {
+            return implode('|', $type);
         }
 
-        if (is_array($return)) {
-            return implode('|', $return);
-        }
-
-        throw new \InvalidArgumentException('Argument $return must have array|string|null type');
+        throw new \InvalidArgumentException('Type param can be array|string only');
     }
 
 } 
