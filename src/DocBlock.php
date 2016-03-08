@@ -372,6 +372,13 @@ class DocBlock
         return $this->make(null, $segments);
     }
 
+    /**
+     * @param string $tag
+     * @param array $segments
+     * @param bool $inline
+     * @param string $format
+     * @return DocBlock
+     */
     protected function make($tag = null, array $segments = [], $inline = false, $format = '{%s}')
     {
         if ($tag !== null) {
