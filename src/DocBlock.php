@@ -411,23 +411,14 @@ class DocBlock
 
     protected function prepareSections()
     {
-        array_walk($this->sections, function (& $section) {
-            $section = $this->processSection($section);
-        });
-    }
-
-    protected function processSection($section)
-    {
-        $lines = explode("\n", $section);
-
-        array_walk($lines, function (& $line) {
-            $line = self::formatToDocLine($line);
-        });
-
-        return implode("\n", $lines);
+        array_map(function (& $section) {
+            $section = self::processSection($section);
+        }, $this->sections);
     }
 
     /**
+     * @paran string $tag
+     * @param $tag
      * @param string $name
      * @param string|array $type
      * @param string $description
@@ -451,6 +442,17 @@ class DocBlock
         }
 
         return $type;
+    }
+
+    protected static function processSection($section)
+    {
+        $lines = explode("\n", $section);
+
+        array_walk($lines, function (& $line) {
+            $line = self::formatToDocLine($line);
+        });
+
+        return implode("\n", $lines);
     }
 
     protected static function formatToDocLine($input)
