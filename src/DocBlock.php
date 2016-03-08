@@ -15,10 +15,11 @@ class DocBlock
 
     public function getOutput()
     {
-        $this->prepareSections();
-        array_unshift($this->sections, self::MARK_BLOCK_BEGIN);
-        array_push($this->sections, ' ' . self::MARK_BLOCK_END);
-        return implode("\n", $this->sections);
+        $sections = $this->processSections();
+        array_unshift($sections, self::MARK_BLOCK_BEGIN);
+        array_push($sections, ' ' . self::MARK_BLOCK_END);
+
+        return implode("\n", $sections);
     }
 
     function __toString()
@@ -246,7 +247,7 @@ class DocBlock
      */
     public function returnTag($type = null, $description = null)
     {
-        $type = self::parseType($type);
+        $type = $this->parseType($type);
 
         return $this->make('return', [$type, $description]);
     }
@@ -305,7 +306,7 @@ class DocBlock
      */
     public function throwsTag($type = null, $description = null)
     {
-        $type = self::parseType($type);
+        $type = $this->parseType($type);
 
         return $this->make('throws', [$type, $description]);
     }
@@ -417,10 +418,13 @@ class DocBlock
         return ($count === 1) ? "\n" : implode(array_fill(0, $count, "\n"));
     }
 
-    protected function prepareSections()
+    /**
+     * @return array
+     */
+    protected function processSections()
     {
-        array_map(function (& $section) {
-            $section = self::processSection($section);
+        return array_map(function (& $section) {
+            $section = $this->processSection($section);
         }, $this->sections);
     }
 
@@ -434,7 +438,7 @@ class DocBlock
      */
     protected function variable($tag, $name, $type = null, $description = null)
     {
-        $type = self::parseType($type);
+        $type = $this->parseType($type);
 
         return $this->make($tag, [$type, '$' . $name, $description]);
     }
@@ -443,7 +447,7 @@ class DocBlock
      * @param string|array $type
      * @return string
      */
-    protected static function parseType($type)
+    protected function parseType($type)
     {
         if (is_array($type)) {
             $type = implode('|', $type);
@@ -452,18 +456,18 @@ class DocBlock
         return $type;
     }
 
-    protected static function processSection($section)
+    protected function processSection($section)
     {
         $lines = explode("\n", $section);
 
         array_walk($lines, function (& $line) {
-            $line = self::formatToDocLine($line);
+            $line = $this->formatToDocLine($line);
         });
 
         return implode("\n", $lines);
     }
 
-    protected static function formatToDocLine($input)
+    protected function formatToDocLine($input)
     {
         return ' ' . self::MARK_LINE . ' ' . trim($input);
     }
