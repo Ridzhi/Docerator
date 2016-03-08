@@ -399,6 +399,7 @@ class DocBlock
     protected function union(array $segments = [])
     {
         $segments = array_filter($segments);
+
         return implode(' ', $segments);
     }
 
