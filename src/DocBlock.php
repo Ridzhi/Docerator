@@ -13,20 +13,6 @@ class DocBlock
 
     protected $sections = [];
 
-    public function getOutput()
-    {
-        $sections = $this->processSections();
-        array_unshift($sections, self::MARK_BLOCK_BEGIN);
-        array_push($sections, ' ' . self::MARK_BLOCK_END);
-
-        return implode("\n", $sections);
-    }
-
-    function __toString()
-    {
-        return $this->getOutput();
-    }
-
     /**
      * @return DocBlock
      */
@@ -370,7 +356,22 @@ class DocBlock
         //n line breaks === n+1 empty lines
         $section = substr($sequence, 0, -1);
         $segments = [$section];
+
         return $this->make(null, $segments);
+    }
+
+    public function getOutput()
+    {
+        $sections = $this->processSections();
+        array_unshift($sections, self::MARK_BLOCK_BEGIN);
+        array_push($sections, ' ' . self::MARK_BLOCK_END);
+
+        return implode("\n", $sections);
+    }
+
+    function __toString()
+    {
+        return $this->getOutput();
     }
 
     /**
