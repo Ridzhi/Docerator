@@ -30,15 +30,14 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('@SomeTag segment1 segment2 segment3', $this->getSectionValue());
     }
 
-    /**
-     * @dataProvider getLineBreakSequenceProvider
-     */
-    public function testGetLineBreakSequence($count, $expected)
+
+    public function testGetLineBreakSequence()
     {
         $method = $this->reflectionClass->getMethod('getLineBreakSequence');
         $method->setAccessible(true);
-        $method->invoke($this->inst, $count);
-        $this->assertEquals($expected, $expected);
+
+        $actual = $method->invoke($this->inst, 3);
+        $this->assertEquals("\n\n\n", $actual);
     }
 
     /**
@@ -77,15 +76,6 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
         $input = 'Some text ';
         $actual = $method->invoke($this->inst, $input);
         $this->assertEquals(' * Some text', $actual);
-    }
-
-    public function getLineBreakSequenceProvider()
-    {
-        return [
-            [1, "\n"],
-            [2, "\n\n"],
-            [4, "\n\n\n\n"]
-        ];
     }
 
     protected function getSectionValue()
