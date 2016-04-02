@@ -19,8 +19,7 @@ class ArgumentTest extends \PHPUnit_Framework_TestCase
         $expected = [$type, $name, $default];
         $this->assertEquals($expected, $actual);
     }
-
-
+    
     public function parseProvider()
     {
         return [
