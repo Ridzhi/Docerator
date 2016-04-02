@@ -24,11 +24,11 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     public function testGetOutput()
     {
         $this->inst->setReturn('string');
-        $this->inst->setArgument(new Argument('string:name=\'player\''));
+        $this->inst->setArgument(new Argument('string:name=\'username\''));
         $this->inst->setArgument(new Argument('int:age'));
         $this->inst->setDescription('Description test method');
         $output = $this->inst->getOutput();
-        $this->assertEquals('string test(string $name = \'player\', int $age) Description test method', $output);
+        $this->assertEquals('string test(string $name = \'username\', int $age) Description test method', $output);
     }
 
     /**
@@ -50,8 +50,8 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     {
         $method = $this->reflectionClass->getMethod('parseType');
         $method->setAccessible(true);
-        $actual = $method->invoke($this->inst, 'SomeClass');
-        $this->assertEquals('SomeClass', $actual);
+        $actual = $method->invoke($this->inst, 'Classname');
+        $this->assertEquals('Classname', $actual);
     }
 
     public function testParseTypeArray()
@@ -65,7 +65,7 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testParseTypeNotArrayOrString()
+    public function testParseInvalidType()
     {
         $method = $this->reflectionClass->getMethod('parseType');
         $method->setAccessible(true);
@@ -75,10 +75,10 @@ class MethodTest extends \PHPUnit_Framework_TestCase
     public function getSignatureProvider()
     {
         return [
-            [[], '()'],
-            [[new Argument('name')], '($name)'],
-            [[new Argument('string:name')], '(string $name)'],
-            [[new Argument('string:name'), new Argument('int:age')], '(string $name, int $age)']
+            'empty' => [[], '()'],
+            'nameOnly' => [[new Argument('name')], '($name)'],
+            'full' => [[new Argument('string:name')], '(string $name)'],
+            'some' => [[new Argument('string:name'), new Argument('int:age')], '(string $name, int $age)']
         ];
     }
 
