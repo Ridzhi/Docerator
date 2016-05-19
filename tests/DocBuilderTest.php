@@ -56,7 +56,7 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testExampleLogicException()
     {
-        $method = $this->reflectionClass->getMethod('example');
+        $method = $this->reflectionClass->getMethod('tagExample');
         $method->invoke($this->inst, 'some_location', 'some description', null, 30);
     }
 
@@ -65,7 +65,7 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testSourceLogicException()
     {
-        $method = $this->reflectionClass->getMethod('source');
+        $method = $this->reflectionClass->getMethod('tagSource');
         $method->setAccessible(true);
         $method->invoke($this->inst, 'some description', null, 30);
     }

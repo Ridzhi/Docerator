@@ -16,7 +16,7 @@ class DocBlock
     /**
      * @return DocBlock
      */
-    public function api()
+    public function tagApi()
     {
         return $this->make('api');
     }
@@ -26,7 +26,7 @@ class DocBlock
      * @param string $email
      * @return DocBlock
      */
-    public function author($name = null, $email = null)
+    public function tagAuthor($name = null, $email = null)
     {
         $args = func_get_args();
 
@@ -41,7 +41,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function category($description = null)
+    public function tagCategory($description = null)
     {
         return $this->make('category', func_get_args());
     }
@@ -50,7 +50,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function copyright($description = null)
+    public function tagCopyright($description = null)
     {
         return $this->make('copyright', func_get_args());
     }
@@ -60,7 +60,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function deprecated($version = null, $description = null)
+    public function tagDeprecated($version = null, $description = null)
     {
         return $this->make('deprecated', func_get_args());
     }
@@ -73,7 +73,7 @@ class DocBlock
      * @param bool $inline
      * @return DocBlock
      */
-    public function example($location = null, $description = null, $startLine = null, $numberOfLines = null, $inline = false)
+    public function tagExample($location = null, $description = null, $startLine = null, $numberOfLines = null, $inline = false)
     {
         if ($numberOfLines !== null && $startLine === null) {
             throw new \LogicException('If you specify <numberOfLines> you must specify <startLine>');
@@ -87,7 +87,7 @@ class DocBlock
     /**
      * @return DocBlock
      */
-    public function filesource()
+    public function tagFilesource()
     {
         return $this->make('filesource');
     }
@@ -96,7 +96,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function ignore($description = null)
+    public function tagIgnore($description = null)
     {
         return $this->make('ignore', func_get_args());
     }
@@ -106,7 +106,7 @@ class DocBlock
      * @param bool $inline
      * @return DocBlock
      */
-    public function internal($description = null, $inline = false)
+    public function tagInternal($description = null, $inline = false)
     {
         return $this->make('internal', [$description], $inline, '{%s }}');
     }
@@ -116,7 +116,7 @@ class DocBlock
      * @param string $name
      * @return DocBlock
      */
-    public function license($url = null, $name = null)
+    public function tagLicense($url = null, $name = null)
     {
         return $this->make('license', func_get_args());
     }
@@ -127,7 +127,7 @@ class DocBlock
      * @param bool $inline
      * @return DocBlock
      */
-    public function link($url = null, $description = null, $inline = false)
+    public function tagLink($url = null, $description = null, $inline = false)
     {
         return $this->make('link', [$url, $description], $inline);
     }
@@ -141,7 +141,7 @@ class DocBlock
      *
      * @see Argument::__construct()
      */
-    public function method($name,  array $args = null,  $return = null, $description = null)
+    public function tagMethod($name, array $args = null, $return = null, $description = null)
     {
         $method = new Method($name);
 
@@ -168,7 +168,7 @@ class DocBlock
      * @param MethodInterface $method
      * @return DocBlock
      */
-    public function methodObj(MethodInterface $method)
+    public function tagMethodObj(MethodInterface $method)
     {
         return $this->make('method', [$method->getOutput()]);
     }
@@ -177,7 +177,7 @@ class DocBlock
      * @param string $name
      * @return DocBlock
      */
-    public function package($name = null)
+    public function tagPackage($name = null)
     {
         return $this->make('package', func_get_args());
     }
@@ -188,7 +188,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function param($name, $type = null, $description = null)
+    public function tagParam($name, $type = null, $description = null)
     {
         return $this->variable('param', ...func_get_args());
     }
@@ -199,7 +199,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function property($name, $type = null, $description = null)
+    public function tagProperty($name, $type = null, $description = null)
     {
         return $this->variable('property', ...func_get_args());
     }
@@ -210,7 +210,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function propertyRead($name, $type = null, $description = null)
+    public function tagPropertyRead($name, $type = null, $description = null)
     {
         return $this->variable('property-read', ...func_get_args());
     }
@@ -221,7 +221,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function propertyWrite($name, $type = null, $description = null)
+    public function tagPropertyWrite($name, $type = null, $description = null)
     {
         return $this->variable('property-write', ...func_get_args());
     }
@@ -231,7 +231,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function returnTag($type = null, $description = null)
+    public function tagReturn($type = null, $description = null)
     {
         $type = $this->parseType($type);
 
@@ -243,7 +243,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function see($target = null, $description = null)
+    public function tagSee($target = null, $description = null)
     {
         return $this->make('see', func_get_args());
     }
@@ -253,7 +253,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function since($version = null, $description = null)
+    public function tagSince($version = null, $description = null)
     {
         return $this->make('since', func_get_args());
     }
@@ -265,7 +265,7 @@ class DocBlock
      * @param bool $inline
      * @return DocBlock
      */
-    public function source($description = null, $startLine = null, $numberOfLines = null, $inline = false)
+    public function tagSource($description = null, $startLine = null, $numberOfLines = null, $inline = false)
     {
         if ($numberOfLines !== null && $startLine === null) {
             throw new \LogicException('If you specify <numberOfLines> you must specify <startLine>');
@@ -280,7 +280,7 @@ class DocBlock
      * @param string $name
      * @return DocBlock
      */
-    public function subpackage($name = null)
+    public function tagSubpackage($name = null)
     {
         return $this->make('subpackage', func_get_args());
     }
@@ -290,7 +290,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function throwsTag($type = null, $description = null)
+    public function tagThrows($type = null, $description = null)
     {
         $type = $this->parseType($type);
 
@@ -301,7 +301,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function todo($description = null)
+    public function tagTodo($description = null)
     {
         return $this->make('todo', func_get_args());
     }
@@ -311,7 +311,7 @@ class DocBlock
      * @param String $description
      * @return DocBlock
      */
-    public function uses($fqsen = null, $description = null)
+    public function tagUses($fqsen = null, $description = null)
     {
         return $this->make('uses', func_get_args());
     }
@@ -322,7 +322,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function varTag($name, $type = null, $description = null)
+    public function tagVar($name, $type = null, $description = null)
     {
         return $this->variable('var', ...func_get_args());
     }
@@ -332,7 +332,7 @@ class DocBlock
      * @param string $description
      * @return DocBlock
      */
-    public function version($version = null, $description = null)
+    public function tagVersion($version = null, $description = null)
     {
         return $this->make('version', func_get_args());
     }
