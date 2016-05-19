@@ -1,4 +1,4 @@
-#DocBuilder - build php doc for generated programs.
+#DocBuilder - builder of phpdoc blocks.
 
 ##Usage
 
@@ -9,39 +9,42 @@ $doc = new \DocBuilder\DocBlock();
 
 $doc
     ->text('Some text')
-    ->api()
-    ->author('Danila Ridzhi', 'danilaridzhi@gmail.com')
-    ->category('description')
-    ->copyright('description')
-    ->deprecated('1.0', 'description')
-    ->example('somefile.php', 'description', 4, 10)
-    ->filesource()
-    ->ignore('description')
-    ->internal('description')
-    ->license('https://opensource.org/licenses/MIT', 'MIT')
-    ->link('project.com', 'description')
-    ->method('getName')
-    ->package('DocBlock')
-    ->param('name', 'string|array', 'description')
-    ->property('name', 'string|array', 'description')
-    ->propertyRead('name', 'string|array', 'description')
-    ->propertyWrite('name', 'string|array', 'description')
-    ->returnTag('string|array', 'description')
-    ->see('DocBlock', 'description')
-    ->since('1.0', 'description')
-    ->source('description', 1, 2)
-    ->subpackage('\DocBuilder\Method')
-    ->throwsTag('Exception', 'description')
+    //all tag methods has prefix tag
+    ->tagApi()
+    ->tagAuthor('Danila Ridzhi', 'danilaridzhi@gmail.com')
+    ->tagCategory('description')
+    ->tagCopyright('description')
+    ->tagDeprecated('1.0', 'description')
+    ->tagExample('somefile.php', 'description', 4, 10)
+    ->tagFilesource()
+    ->tagIgnore('description')
+    ->tagInternal('description')
+    ->tagLicense('https://opensource.org/licenses/MIT', 'MIT')
+    ->tagLink('project.com', 'description')
+    ->tagMethod('getName')
+    ->tagPackage('DocBlock')
+    ->tagParam('name', 'string|array', 'description')
+    ->tagProperty('name', 'string|array', 'description')
+    ->tagPropertyRead('name', 'string|array', 'description')
+    ->tagPropertyWrite('name', 'string|array', 'description')
+    ->tagReturn('string|array', 'description')
+    ->tagSee('DocBlock', 'description')
+    ->tagSince('1.0', 'description')
+    ->tagSource('description', 1, 2)
+    ->tagSubpackage('\DocBuilder\Method')
+    ->tagThrows('Exception', 'description')
+    ->tagUses('DocBlock', 'description')
+    ->tagVar('name', 'string|array', 'description')
+    ->tagVersion('1.0', 'description')
+    //and helpers
     ->emptyLine(2)
-    ->uses('DocBlock', 'description')
-    ->varTag('name', 'string|array', 'description')
-    ->version('1.0', 'description');
+    ->text('Some text')
 
-// Output
+
+// Output use magic
 echo $doc;
-// or
-$output = $doc->getOutput();
-echo $output;
+// or not
+echo $doc->getOutput();
 ```
 
 ##Details
@@ -50,8 +53,7 @@ echo $output;
 
 #### Inline syntax
 ```php
-$doc = new \DocBuilder\DocBlock();
-$doc->method('getAge', ['string:name=\'username\''], 'int', 'Get user age');
+$doc->tagMethod('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ```
 
 ####Object syntax (Method object helper)
@@ -64,16 +66,16 @@ $method
     ->setDescription('Get user age');
 
 $doc = new \DocBuilder\DocBlock();
-$doc->methodObj($method);
+$doc->tagMethodObj($method);
 ```
 ###Argument helper
 Argument object constructor can get special expression looks like varType:varName=varDefaultValue,
-where varType and varDefaultValue is not required. Also you can use classic oop approach.
+where varType and varDefaultValue is not required. Also you can use setters.
 
 ```php
 // special expression
 $arg = new \DocBuilder\Argument('string:name=\'username\'');
-// classic
+// setters
 $arg = new \DocBuilder\Argument();
 $arg
     ->setName('name')
@@ -84,18 +86,17 @@ $arg
 ```
 
 ###Type definition
-$type argument also supports array syntax
+Data type argument can be pass as string or array (in all methods, which use data type arg).
 
 ```php
-$doc = new \DocBuilder\DocBlock();
 $doc
-	->param('name', ['string', 'array'], 'description')
-	->property('name', ['string', 'array'], 'description')
-    ->propertyRead('name', ['string', 'array'], 'description')
-    ->propertyWrite('name', ['string', 'array'], 'description')
-    ->returnTag(['string', 'array'], 'description')
-    ->varTag('name', ['string', 'array'], 'description');
+	->tagParam('name', 'string array', 'description')
+	//or
+	->tagParam('name', ['string', 'array'], 'description');
 
 $arg = new \DocBuilder\Argument();
-$arg->setType(['string', 'array']);
+$arg
+	->setType('string array')
+	//or
+	->setType(['string', 'array']);
 ``` 
