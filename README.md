@@ -1,5 +1,10 @@
 #DocBuilder - builder of phpdoc blocks.
 
+##Installation
+```
+composer require ridzhi/docbuilder
+```
+
 ##Usage
 
 DocBuilder supports all tags from http://www.phpdoc.org.
@@ -8,7 +13,6 @@ DocBuilder supports all tags from http://www.phpdoc.org.
 $doc = new \DocBuilder\DocBlock();
 
 $doc
-    ->text('Some text')
     //all tag methods has prefix tag
     ->tagApi()
     ->tagAuthor('Danila Ridzhi', 'danilaridzhi@gmail.com')
