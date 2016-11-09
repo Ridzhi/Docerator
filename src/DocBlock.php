@@ -185,7 +185,7 @@ class DocBlock
      */
     public function tagParam($name, $type = null, $description = null)
     {
-        return $this->variable('param', ...[$name, $type, $description]);
+        return $this->variable('param', $name, $type, $description);
     }
 
     /**
@@ -196,7 +196,7 @@ class DocBlock
      */
     public function tagProperty($name, $type = null, $description = null)
     {
-        return $this->variable('property', ...[$name, $type, $description]);
+        return $this->variable('property', $name, $type, $description);
     }
 
     /**
@@ -207,7 +207,7 @@ class DocBlock
      */
     public function tagPropertyRead($name, $type = null, $description = null)
     {
-        return $this->variable('property-read', ...[$name, $type, $description]);
+        return $this->variable('property-read', $name, $type, $description);
     }
 
     /**
@@ -218,7 +218,7 @@ class DocBlock
      */
     public function tagPropertyWrite($name, $type = null, $description = null)
     {
-        return $this->variable('property-write', ...[$name, $type, $description]);
+        return $this->variable('property-write', $name, $type, $description);
     }
 
     /**
@@ -316,7 +316,7 @@ class DocBlock
      */
     public function tagVar($name, $type = null, $description = null)
     {
-        return $this->variable('var', ...[$name, $type, $description]);
+        return $this->variable('var', $name, $type, $description);
     }
 
     /**
