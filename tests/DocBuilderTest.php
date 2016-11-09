@@ -53,20 +53,11 @@ class DocBuilderTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \LogicException
      */
-    public function testExampleLogicException()
+    public function testCheckLocationSignature()
     {
-        $method = $this->reflectionClass->getMethod('tagExample');
-        $method->invoke($this->inst, 'some_location', 'some description', null, 30);
-    }
-
-    /**
-     * @expectedException \LogicException
-     */
-    public function testSourceLogicException()
-    {
-        $method = $this->reflectionClass->getMethod('tagSource');
+        $method = $this->reflectionClass->getMethod('checkLocationSignature');
         $method->setAccessible(true);
-        $method->invoke($this->inst, 'some description', null, 30);
+        $method->invoke($this->inst, 30, null);
     }
 
     public function testFormatToDocLine()

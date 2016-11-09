@@ -28,13 +28,11 @@ class DocBlock
      */
     public function tagAuthor($name = null, $email = null)
     {
-        $args = func_get_args();
-
-        if (isset($args[1])) {
-            $args[1] = '<' . $email . '>';
+        if ($email !== null) {
+            $email = '<' . $email . '>';
         }
 
-        return $this->make('author', $args);
+        return $this->make('author', [$name, $email]);
     }
 
     /**
@@ -43,7 +41,7 @@ class DocBlock
      */
     public function tagCategory($description = null)
     {
-        return $this->make('category', func_get_args());
+        return $this->make('category', [$description]);
     }
 
     /**
@@ -52,7 +50,7 @@ class DocBlock
      */
     public function tagCopyright($description = null)
     {
-        return $this->make('copyright', func_get_args());
+        return $this->make('copyright', [$description]);
     }
 
     /**
@@ -62,7 +60,7 @@ class DocBlock
      */
     public function tagDeprecated($version = null, $description = null)
     {
-        return $this->make('deprecated', func_get_args());
+        return $this->make('deprecated', [$version, $description]);
     }
 
     /**
@@ -75,10 +73,7 @@ class DocBlock
      */
     public function tagExample($location = null, $description = null, $startLine = null, $numberOfLines = null, $inline = false)
     {
-        if ($numberOfLines !== null && $startLine === null) {
-            throw new \LogicException('If you specify <numberOfLines> you must specify <startLine>');
-        }
-
+        $this->checkLocationSignature($numberOfLines, $startLine);
         $segments = [$location, $startLine, $numberOfLines, $description];
 
         return $this->make('example', $segments, $inline);
@@ -98,7 +93,7 @@ class DocBlock
      */
     public function tagIgnore($description = null)
     {
-        return $this->make('ignore', func_get_args());
+        return $this->make('ignore', [$description]);
     }
 
     /**
@@ -118,7 +113,7 @@ class DocBlock
      */
     public function tagLicense($url = null, $name = null)
     {
-        return $this->make('license', func_get_args());
+        return $this->make('license', [$url, $name]);
     }
 
     /**
@@ -179,55 +174,55 @@ class DocBlock
      */
     public function tagPackage($name = null)
     {
-        return $this->make('package', func_get_args());
+        return $this->make('package', [$name]);
     }
 
     /**
      * @param string $name
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
     public function tagParam($name, $type = null, $description = null)
     {
-        return $this->variable('param', ...func_get_args());
+        return $this->variable('param', ...[$name, $type, $description]);
     }
 
     /**
      * @param string $name
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
     public function tagProperty($name, $type = null, $description = null)
     {
-        return $this->variable('property', ...func_get_args());
+        return $this->variable('property', ...[$name, $type, $description]);
     }
 
     /**
      * @param string $name
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
     public function tagPropertyRead($name, $type = null, $description = null)
     {
-        return $this->variable('property-read', ...func_get_args());
+        return $this->variable('property-read', ...[$name, $type, $description]);
     }
 
     /**
      * @param string $name
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
     public function tagPropertyWrite($name, $type = null, $description = null)
     {
-        return $this->variable('property-write', ...func_get_args());
+        return $this->variable('property-write', ...[$name, $type, $description]);
     }
 
     /**
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
@@ -245,7 +240,7 @@ class DocBlock
      */
     public function tagSee($target = null, $description = null)
     {
-        return $this->make('see', func_get_args());
+        return $this->make('see', [$target, $description]);
     }
 
     /**
@@ -255,7 +250,7 @@ class DocBlock
      */
     public function tagSince($version = null, $description = null)
     {
-        return $this->make('since', func_get_args());
+        return $this->make('since', [$version, $description]);
     }
 
     /**
@@ -267,10 +262,7 @@ class DocBlock
      */
     public function tagSource($description = null, $startLine = null, $numberOfLines = null, $inline = false)
     {
-        if ($numberOfLines !== null && $startLine === null) {
-            throw new \LogicException('If you specify <numberOfLines> you must specify <startLine>');
-        }
-
+        $this->checkLocationSignature($numberOfLines, $startLine);
         $segments = [$startLine, $numberOfLines, $description];
 
         return $this->make('source', $segments, $inline);
@@ -282,11 +274,11 @@ class DocBlock
      */
     public function tagSubpackage($name = null)
     {
-        return $this->make('subpackage', func_get_args());
+        return $this->make('subpackage', [$name]);
     }
 
     /**
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
@@ -303,28 +295,28 @@ class DocBlock
      */
     public function tagTodo($description = null)
     {
-        return $this->make('todo', func_get_args());
+        return $this->make('todo', [$description]);
     }
 
     /**
      * @param string $fqsen
-     * @param String $description
+     * @param string $description
      * @return DocBlock
      */
     public function tagUses($fqsen = null, $description = null)
     {
-        return $this->make('uses', func_get_args());
+        return $this->make('uses', [$fqsen, $description]);
     }
 
     /**
      * @param string $name
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
     public function tagVar($name, $type = null, $description = null)
     {
-        return $this->variable('var', ...func_get_args());
+        return $this->variable('var', ...[$name, $type, $description]);
     }
 
     /**
@@ -334,7 +326,7 @@ class DocBlock
      */
     public function tagVersion($version = null, $description = null)
     {
-        return $this->make('version', func_get_args());
+        return $this->make('version', [$version, $description]);
     }
 
     /**
@@ -343,7 +335,7 @@ class DocBlock
      */
     public function text($value)
     {
-        return $this->make(null, func_get_args());
+        return $this->make(null, [$value]);
     }
 
     /**
@@ -355,11 +347,13 @@ class DocBlock
         $sequence = $this->getLineBreakSequence($count);
         //n line breaks === n+1 empty lines
         $section = substr($sequence, 0, -1);
-        $segments = [$section];
 
-        return $this->make(null, $segments);
+        return $this->make(null, [$section]);
     }
 
+    /**
+     * @return string
+     */
     public function getOutput()
     {
         $sections = $this->processSections();
@@ -369,7 +363,10 @@ class DocBlock
         return implode("\n", $sections);
     }
 
-    function __toString()
+    /**
+     * @return string
+     */
+    public function __toString()
     {
         return $this->getOutput();
     }
@@ -398,6 +395,10 @@ class DocBlock
         return $this;
     }
 
+    /**
+     * @param array $segments
+     * @return string
+     */
     protected function union(array $segments = [])
     {
         $segments = array_filter($segments);
@@ -405,11 +406,18 @@ class DocBlock
         return implode(' ', $segments);
     }
 
+    /**
+     * @param $section
+     */
     protected function push($section)
     {
         array_push($this->sections, $section);
     }
 
+    /**
+     * @param $count
+     * @return string
+     */
     protected function getLineBreakSequence($count)
     {
         if ($count <= 0) {
@@ -433,7 +441,7 @@ class DocBlock
      * @paran string $tag
      * @param $tag
      * @param string $name
-     * @param string|array $type
+     * @param mixed $type string|array
      * @param string $description
      * @return DocBlock
      */
@@ -445,7 +453,7 @@ class DocBlock
     }
 
     /**
-     * @param string|array $type
+     * @param mixed $type string|array
      * @return string
      */
     protected function parseType($type)
@@ -457,6 +465,10 @@ class DocBlock
         return $type;
     }
 
+    /**
+     * @param string $section
+     * @return string
+     */
     protected function processSection($section)
     {
         $lines = explode("\n", $section);
@@ -468,9 +480,25 @@ class DocBlock
         return implode("\n", $lines);
     }
 
+    /**
+     * @param string $input
+     * @return string
+     */
     protected function formatToDocLine($input)
     {
         return ' ' . self::MARK_LINE . ' ' . trim($input);
+    }
+
+    /**
+     * @param int $numberOfLines
+     * @param int $startLine
+     * @throws \LogicException
+     */
+    protected function checkLocationSignature($numberOfLines = null, $startLine = null)
+    {
+        if ($numberOfLines !== null && $startLine === null) {
+            throw new \LogicException('If you specify <numberOfLines> you must specify <startLine>');
+        }
     }
 
 } 
