@@ -1,11 +1,11 @@
-#DocBuilder - builder of phpdoc blocks.
+# DocBuilder - builder of phpdoc blocks.
 
-##Installation
+## Installation
 ```
 composer require ridzhi/docbuilder
 ```
 
-##Usage
+## Usage
 
 DocBuilder supports all tags from http://www.phpdoc.org.
 
@@ -51,16 +51,16 @@ echo $doc;
 echo $doc->getOutput();
 ```
 
-##Details
+## Details
 
-###Method tag
+### Method tag
 
 #### Inline syntax
 ```php
 $doc->tagMethod('getAge', ['string:name=\'username\''], 'int', 'Get user age');
 ```
 
-####Object syntax (Method object helper)
+#### Object syntax (Method object helper)
 
 ```php
 $method = new \DocBuilder\Method('getAge');
@@ -72,7 +72,7 @@ $method
 $doc = new \DocBuilder\DocBlock();
 $doc->tagMethodObj($method);
 ```
-###Argument helper
+### Argument helper
 Argument object constructor can get special expression looks like varType:varName=varDefaultValue,
 where varType and varDefaultValue is not required. Also you can use setters.
 
@@ -89,7 +89,7 @@ $arg
     ->setDefaultAsString('username');
 ```
 
-###Type definition
+### Type definition
 Data type argument can be pass as string or array (in all methods, which use data type arg).
 
 ```php
